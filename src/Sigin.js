@@ -9,6 +9,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles} from '@material-ui/core/styles';
 import swal from 'sweetalert';
 import { Typography } from '@material-ui/core';
+import axios from 'axios';
 
 
 
@@ -42,16 +43,32 @@ const useStyles = makeStyles((theme) => ({
 async function loginUser(credentials){
     const loginbody = {username:credentials[0], password:credentials[1]};
     
-    return fetch('http://localhost:8080/v1/signin',{
+    return axios('http://localhost:8080/v1/signin',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Host': 'http://localhost:8080',
-            'Content-Length': JSON.stringify(loginbody).toString(),
         },
-        body: JSON.stringify(loginbody)
+        data: loginbody
     })
-    .then(data => data.json())
+    //.then(data => data.json())
+    .catch((err) => {
+        if( err.response){
+            const {status, config} = err.response;
+
+            if(status === 404) {
+                console.log(`${config.url} not found`);
+            }
+
+            if(status === 500) {
+                console.log("Server error");
+            }
+        } else if (err.request){
+            console.log("Error", err.message);
+        } else {
+            console.log("Error", err.message);
+        }
+
+    });
 }
 
 export default function Signin(){
@@ -65,25 +82,26 @@ export default function Signin(){
             username,
             password
         ]);
-        //console.log(response);
-        const responseData = response['data'];
-        if(responseData){
-            swal("Sucess", response.msg, "success.", {
-                buttons: false,
-                timer: 2000,
-            })
-            .then((value) => {
-                localStorage.setItem('username', responseData['username']);
-                localStorage.setItem('accessToken', responseData['accessToken']);
-                localStorage.setItem('refreshToken', responseData['refreshToken']);
-                console.log(localStorage.getItem('username'));
-                console.log(localStorage.getItem('accessToken'));
-                console.log(localStorage.getItem('refreshToken'));
-                window.location.href = "/profile";
-            });
-        }else{
-            swal("Failed", response.msg, "error");
+        
+        if( response){
+            console.log(response);
+            const responseData = response['data'];
+            const responseBody = responseData['data'];
+            if(responseBody){
+                    console.log("Success");
+                    localStorage.setItem('username', responseBody['username']);
+                    localStorage.setItem('accessToken', responseBody['accessToken']);
+                    localStorage.setItem('refreshToken', responseBody['refreshToken']);
+                    console.log(localStorage.getItem('username'));
+                    console.log(localStorage.getItem('accessToken'));
+                    console.log(localStorage.getItem('refreshToken'));
+                    window.location.href = "/profile";
+            }else{
+                swal("Failed", response.msg, "error");
+                console.log("Error");
+            }
         }
+        
     }
 
     return (
