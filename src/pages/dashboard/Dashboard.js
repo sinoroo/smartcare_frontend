@@ -33,6 +33,8 @@ import { Typography } from "../../components/Wrappers";
 import Dot from "../../components/Sidebar/components/Dot";
 import Table from "./components/Table/Table";
 import BigStat from "./components/BigStat/BigStat";
+import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 
 const mainChartData = getMainChartData();
 const PieChartData = [
@@ -45,6 +47,7 @@ const PieChartData = [
 export default function Dashboard(props) {
   var classes = useStyles();
   var theme = useTheme();
+  const { t, i18n } = useTranslation(['page'])
 
   // local
   var [mainChartState, setMainChartState] = useState("monthly");
@@ -61,7 +64,7 @@ export default function Dashboard(props) {
       <Grid container spacing={4}>
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
-            title="Visits Today"
+            title={t('방문자수')}
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
