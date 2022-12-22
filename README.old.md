@@ -1,1 +1,0 @@
-# smartcare_frontend
