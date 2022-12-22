@@ -288,15 +288,15 @@ export default function Header(props) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              John Smith
+              {localStorage.getItem('username')}
             </Typography>
             <Typography
               className={classes.profileMenuLink}
               component="a"
               color="primary"
-              href="https://flatlogic.com"
+              href="http://www.cheilelec.com"
             >
-              Flalogic.com
+              cheilelec.com
             </Typography>
           </div>
           <MenuItem
