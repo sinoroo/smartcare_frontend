@@ -128,7 +128,7 @@ export default function Dashboard(props) {
         </Grid>
         <Grid item lg={3} md={8} sm={6} xs={12}>
           <Widget
-            title="App Performance"
+            title={t("성능")}
             upperTitle
             className={classes.card}
             bodyClass={classes.fullHeightBody}

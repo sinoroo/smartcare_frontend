@@ -58,7 +58,7 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
 
   if (!!login && !!password) {
     const loginbody = {username:login, password:password};
-    axios('http://localhost:8080/v1/signin',{
+    axios('http://172.16.10.196/api/v1/signin',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
