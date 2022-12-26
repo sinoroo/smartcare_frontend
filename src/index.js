@@ -8,7 +8,7 @@ import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import { LayoutProvider } from "./context/LayoutContext";
 import { UserProvider } from "./context/UserContext";
-
+import './i18n';
 
 ReactDOM.render(
   <LayoutProvider>

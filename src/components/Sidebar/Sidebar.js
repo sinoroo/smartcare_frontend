@@ -30,6 +30,8 @@ import {
   toggleSidebar,
 } from "../../context/LayoutContext";
 
+import { TranslationI18N } from "../../i18n/TranslationI18N";
+
 const structure = [
   { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
   {

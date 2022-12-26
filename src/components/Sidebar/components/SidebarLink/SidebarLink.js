@@ -18,6 +18,9 @@ import useStyles from "./styles";
 // components
 import Dot from "../Dot";
 
+import { useTranslation } from "react-i18next";
+import i18n from "i18next";
+
 export default function SidebarLink({
   link,
   icon,
@@ -29,6 +32,8 @@ export default function SidebarLink({
   type,
 }) {
   var classes = useStyles();
+
+  const { t, i18n } = useTranslation(['page'])
 
   // local
   var [isOpen, setIsOpen] = useState(false);
@@ -43,7 +48,7 @@ export default function SidebarLink({
           [classes.linkTextHidden]: !isSidebarOpened,
         })}
       >
-        {label}
+        {t(label)}
       </Typography>
     );
 
@@ -76,7 +81,7 @@ export default function SidebarLink({
               [classes.linkTextHidden]: !isSidebarOpened,
             }),
           }}
-          primary={label}
+          primary={t(label)}
         />
         </a>
       </ListItem>
@@ -111,7 +116,7 @@ export default function SidebarLink({
               [classes.linkTextHidden]: !isSidebarOpened,
             }),
           }}
-          primary={label}
+          primary={t(label)}
         />
       </ListItem>
     );
@@ -140,7 +145,7 @@ export default function SidebarLink({
               [classes.linkTextHidden]: !isSidebarOpened,
             }),
           }}
-          primary={label}
+          primary={t(label)}
         />
       </ListItem>
       {children && (
